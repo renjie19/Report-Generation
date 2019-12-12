@@ -26,7 +26,7 @@ public class PdfGenerator extends PdfPageEventHelper{
     public void start(){
         try{
             Document document = new Document();
-            writer = PdfWriter.getInstance(document,new FileOutputStream("test.pdf"));
+            writer = PdfWriter.getInstance(document,new FileOutputStream("reports/test.pdf"));
             document.open();
 
             PdfPTable table = new PdfPTable(8);

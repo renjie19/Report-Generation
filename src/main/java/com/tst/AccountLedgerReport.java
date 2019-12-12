@@ -16,13 +16,15 @@ public class AccountLedgerReport {
 
     public void start(){
         initializeData();
-
         try{
             Document document = new Document();
-            writer = PdfWriter.getInstance(document, new FileOutputStream("AccountLedgerReport.pdf"));
+            writer = PdfWriter.getInstance(document, new FileOutputStream("reports/AccountLedgerReport.pdf"));
             document.open();
             document.add(getHeader());
             document.add(getConcessionaireInfoTable());
+            Paragraph balance = new Paragraph("Running Balance: "+concessionaireInfo.get("Running Balance: "));
+            balance.setAlignment(Element.ALIGN_RIGHT);
+            document.add(balance);
             PdfPTable mainTable = getDefaultTableWithColumnHeaders();
             getDataList().forEach(accountLedgerDto -> {
                 mainTable.addCell(new Phrase(accountLedgerDto.getDate()));
@@ -53,7 +55,9 @@ public class AccountLedgerReport {
         concessionaireDetails.setSpacingAfter(20);
 
         for(Map.Entry<String,String> entry: concessionaireInfo.entrySet()){
-            concessionaireDetails.addCell(new Phrase(entry.getKey()+entry.getValue()));
+            if(!entry.getKey().equals("Running Balance: ")){
+                concessionaireDetails.addCell(new Phrase(entry.getKey()+entry.getValue()));
+            }
         }
         return concessionaireDetails;
     }
@@ -79,11 +83,12 @@ public class AccountLedgerReport {
         concessionaireInfo.put("","");
         concessionaireInfo.put("From Date: ", "MM/DD/YYYY");
         concessionaireInfo.put("To Date: ", "MM/DD/YYYY");
+        concessionaireInfo.put("Running Balance: ", "0.00");
     }
 
     private PdfPTable getDefaultTableWithColumnHeaders(){
         try {
-            PdfPTable table = new PdfPTable(11);
+            PdfPTable table = new PdfPTable(tableColumnHeaders.size());
             table.getDefaultCell().setVerticalAlignment(Element.ALIGN_MIDDLE);
             table.getDefaultCell().setHorizontalAlignment(Element.ALIGN_CENTER);
             table.setSpacingBefore(20f);

@@ -44,7 +44,7 @@ public class YTDConsumptionReport {
 
         try{
             Document document = new Document();
-            writer = PdfWriter.getInstance(document,new FileOutputStream("YTDConsumptionReport.pdf"));
+            writer = PdfWriter.getInstance(document,new FileOutputStream("reports/YTDConsumptionReport.pdf"));
             document.open();
 
             PdfPTable detailsTable = new PdfPTable(2);
