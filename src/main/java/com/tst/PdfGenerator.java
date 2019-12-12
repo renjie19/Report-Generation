@@ -3,6 +3,7 @@ package com.tst;
 
 import com.itextpdf.text.*;
 import com.itextpdf.text.pdf.*;
+import lombok.Data;
 
 import java.io.FileOutputStream;
 import java.text.DateFormat;
@@ -136,5 +137,18 @@ public class PdfGenerator extends PdfPageEventHelper{
             System.out.println(e.getMessage());
         }
         return null;
+    }
+
+    //Dto class
+    @Data
+    private class ConcessionaireDto {
+        private String accountNumber;
+        private String concessionaire;
+        private int zone;
+        private String location;
+        private String classification;
+        private String meterSize;
+        private String meterNumber;
+        private String dateChange;
     }
 }

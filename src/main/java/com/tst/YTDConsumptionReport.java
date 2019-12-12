@@ -3,6 +3,7 @@ package com.tst;
 import com.itextpdf.text.*;
 import com.itextpdf.text.pdf.PdfPTable;
 import com.itextpdf.text.pdf.PdfWriter;
+import lombok.Data;
 
 import java.io.FileOutputStream;
 import java.text.DateFormat;
@@ -10,7 +11,7 @@ import java.text.SimpleDateFormat;
 import java.util.*;
 import java.util.List;
 
-public class PdfGenerator2 {
+public class YTDConsumptionReport {
 
     private DateFormat dateFormat = new SimpleDateFormat("MM/dd/yyyy");
     private DateFormat timeFormat = new SimpleDateFormat("hh:mm aa");
@@ -43,7 +44,7 @@ public class PdfGenerator2 {
 
         try{
             Document document = new Document();
-            writer = PdfWriter.getInstance(document,new FileOutputStream("test2.pdf"));
+            writer = PdfWriter.getInstance(document,new FileOutputStream("YTDConsumptionReport.pdf"));
             document.open();
 
             PdfPTable detailsTable = new PdfPTable(2);
@@ -176,5 +177,15 @@ public class PdfGenerator2 {
         signatures.put("des2", "Designation2");
         signatures.put("des3", "Designation3");
         return signatures;
+    }
+
+    //Dto class
+    @Data
+    private class YearToDateReportDto {
+        private String accountNumber;
+        private String concessionaire;
+        private String consumption;
+        private String billAmount;
+        private String unpaidBalance;
     }
 }
