@@ -9,7 +9,7 @@ import java.io.FileOutputStream;
 import java.util.*;
 import java.util.List;
 
-public class AccountLedgerReport {
+public class AccountLedgerReport_OtherAccountsReceivable {
     private PdfWriter writer;
     private List<String> tableColumnHeaders;
     private Map<String,String> concessionaireInfo;
@@ -18,7 +18,7 @@ public class AccountLedgerReport {
         initializeData();
         try{
             Document document = new Document();
-            writer = PdfWriter.getInstance(document, new FileOutputStream("reports/AccountLedgerReport.pdf"));
+            writer = PdfWriter.getInstance(document, new FileOutputStream("reports/OtherARReport_AccountLedgerReport.pdf"));
             document.open();
             document.add(getHeader());
             document.add(getConcessionaireInfoTable());
