@@ -1,4 +1,4 @@
-package com.tst.reports;
+package com.tst.test2;
 
 import java.util.List;
 

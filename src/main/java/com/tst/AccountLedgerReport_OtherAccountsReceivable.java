@@ -3,6 +3,7 @@ package com.tst;
 import com.itextpdf.text.*;
 import com.itextpdf.text.pdf.PdfPTable;
 import com.itextpdf.text.pdf.PdfWriter;
+import com.tst.reports.AccountLedgerDto;
 import lombok.Data;
 
 import java.io.FileOutputStream;
@@ -122,7 +123,7 @@ public class AccountLedgerReport_OtherAccountsReceivable {
             accountLedgerDto.setDebit("0.00");
             accountLedgerDto.setCredit("0.00");
             accountLedgerDto.setAdvance("0.00");
-            accountLedgerDto.setBalance("0.00");
+            accountLedgerDto.setBalance(0);
             accountLedgerDto.setUser("admin");
             list.add(accountLedgerDto);
         }
@@ -164,20 +165,5 @@ public class AccountLedgerReport_OtherAccountsReceivable {
             System.out.println(e.getMessage());
         }
         return null;
-    }
-
-    @Data
-    private class AccountLedgerDto{
-        private String date;
-        private String particular;
-        private String reading;
-        private String Usage;
-        private String dueDate;
-        private String reference;
-        private String debit;
-        private String credit;
-        private String advance;
-        private String balance;
-        private String user;
     }
 }

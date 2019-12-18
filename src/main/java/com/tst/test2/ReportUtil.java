@@ -1,7 +1,11 @@
-package com.tst.reports;
+package com.tst.test2;
 
+import com.itextpdf.text.DocumentException;
 import com.itextpdf.text.Element;
+import com.itextpdf.text.Font;
+import com.itextpdf.text.Phrase;
 import com.itextpdf.text.pdf.PdfPTable;
+import sun.font.FontFamily;
 
 /**
  * @author Michael Ryan A. Paclibar <michael@satellite.com.ph>
@@ -20,7 +24,19 @@ public final class ReportUtil {
 
     public static void addTableHeaders(String[] headers, PdfPTable pdfPTable) {
         for (String header : headers) {
-            pdfPTable.addCell(header);
+            pdfPTable.addCell(new Phrase(header));
+        }
+    }
+
+    public static void setColumnWidths(String[] headers, PdfPTable pdfPTable) {
+        try {
+            int[] widths = new int[headers.length];
+            for (int x = 0; x < headers.length; x++) {
+                widths[x] = headers[x].length();
+            }
+            pdfPTable.setWidths(widths);
+        } catch (Exception e) {
+            e.printStackTrace();
         }
     }
 }
