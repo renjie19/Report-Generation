@@ -3,7 +3,7 @@ package com.tst.reportDtos;
 import lombok.Data;
 
 @Data
-public class AccountLedgerDto {
+public class AccountLedgerReportDto {
     private String date;
     private String particular;
     private String reading;

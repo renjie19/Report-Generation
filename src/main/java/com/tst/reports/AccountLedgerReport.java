@@ -2,23 +2,22 @@ package com.tst.reports;
 
 import com.itextpdf.text.*;
 import com.itextpdf.text.pdf.PdfPTable;
-import com.tst.reportDtos.AccountLedgerDto;
+import com.tst.reportDtos.AccountLedgerReportDto;
 import com.tst.test2.PdfReport;
 import com.tst.test2.QueryReportData;
 import com.tst.test2.ReportUtil;
 
-import java.util.List;
 import java.util.Map;
 
 
 public class AccountLedgerReport extends PdfReport {
 
     public static final String REPORT_HEADER_TITLE = "Header Title";
-    private final QueryReportData<AccountLedgerDto> data;
+    private final QueryReportData<AccountLedgerReportDto> data;
     private final Map<String,String> headerParams;
 
 
-    public AccountLedgerReport(QueryReportData<AccountLedgerDto> data, Map<String, String> headerParams) {
+    public AccountLedgerReport(QueryReportData<AccountLedgerReportDto> data, Map<String, String> headerParams) {
         super(PageSize.A4.rotate());
         this.data = data;
         this.headerParams = headerParams;

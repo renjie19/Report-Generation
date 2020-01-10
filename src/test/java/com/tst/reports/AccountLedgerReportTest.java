@@ -1,6 +1,6 @@
 package com.tst.reports;
 
-import com.tst.reportDtos.AccountLedgerDto;
+import com.tst.reportDtos.AccountLedgerReportDto;
 import com.tst.test2.PdfReport;
 import com.tst.test2.QueryReportData;
 import org.junit.Test;
@@ -14,10 +14,10 @@ import java.util.Map;
 
 public class AccountLedgerReportTest {
 
-    public List<AccountLedgerDto> getData() {
-        List<AccountLedgerDto> list = new ArrayList<>();
+    public List<AccountLedgerReportDto> getData() {
+        List<AccountLedgerReportDto> list = new ArrayList<>();
         for (int x = 0; x < 15; x++) {
-            AccountLedgerDto ledgerDto = new AccountLedgerDto();
+            AccountLedgerReportDto ledgerDto = new AccountLedgerReportDto();
             ledgerDto.setAdvance("0");
             ledgerDto.setBalance((int) (x * Math.random()));
             ledgerDto.setCredit("0");
@@ -45,7 +45,7 @@ public class AccountLedgerReportTest {
             headerParams.put("From Date: ", "MM/dd/YYYY");
             headerParams.put("To Date: ", "MM/dd/YYYY");
             headerParams.put("Header Title", "WATER METER BILLING");
-            QueryReportData<AccountLedgerDto> data = this::getData;
+            QueryReportData<AccountLedgerReportDto> data = this::getData;
             PdfReport accountLedgerReport = new AccountLedgerReport(data, headerParams);
             byte[] result = accountLedgerReport.generate();
             File f = new File("new_reports/WaterBillReport.pdf");
@@ -67,7 +67,7 @@ public class AccountLedgerReportTest {
             headerParams.put("From Date: ", "MM/dd/YYYY");
             headerParams.put("To Date: ", "MM/dd/YYYY");
             headerParams.put("Header Title", "OTHER ACCOUNTS RECEIVABLE");
-            QueryReportData<AccountLedgerDto> data = this::getData;
+            QueryReportData<AccountLedgerReportDto> data = this::getData;
             PdfReport accountLedgerReport = new AccountLedgerReport(data, headerParams);
             byte[] result = accountLedgerReport.generate();
             File f = new File("new_reports/OtherAccountsReceivableReport.pdf");
