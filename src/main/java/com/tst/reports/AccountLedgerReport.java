@@ -2,6 +2,7 @@ package com.tst.reports;
 
 import com.itextpdf.text.*;
 import com.itextpdf.text.pdf.PdfPTable;
+import com.tst.reportDtos.AccountLedgerDto;
 import com.tst.test2.PdfReport;
 import com.tst.test2.QueryReportData;
 import com.tst.test2.ReportUtil;
@@ -13,7 +14,6 @@ import java.util.Map;
 public class AccountLedgerReport extends PdfReport {
 
     public static final String REPORT_HEADER_TITLE = "Header Title";
-    public static final String REPORT_ACCOUNT_NO = "Account No.";
     private final QueryReportData<AccountLedgerDto> data;
     private final Map<String,String> headerParams;
 
@@ -24,7 +24,6 @@ public class AccountLedgerReport extends PdfReport {
         this.headerParams = headerParams;
     }
 
-
     @Override
     protected void reportHeader() {
         try {
@@ -32,17 +31,14 @@ public class AccountLedgerReport extends PdfReport {
             PdfPTable headerDetails = ReportUtil.getPdfTable(2);
             headerDetails.getDefaultCell().setHorizontalAlignment(Element.ALIGN_LEFT);
             headerDetails.getDefaultCell().setBorderWidth(0f);
-            headerDetails.addCell(new Phrase(String.format("%s : %s",REPORT_ACCOUNT_NO, headerParams.get(REPORT_ACCOUNT_NO))));
             for(Map.Entry<String, String> set : headerParams.entrySet()) {
-                headerDetails.addCell(new Phrase(String.format(("s% : s%"), set.getKey(), set.getValue())));
+                headerDetails.addCell(new Phrase(String.format(("%s %s"), set.getKey(), set.getValue())));
             }
-            List<AccountLedgerDto> ledgers = data.query();
-            int total = 0;
-            for(AccountLedgerDto ledger : ledgers) {
-                total += ledger.getBalance();
-            }
+
+            int total = data.query().stream().reduce(0,(counter, item)-> counter + item.getBalance(), Integer::sum);
             Paragraph runningBalance = new Paragraph("Running Balance: "+ total);
             runningBalance.setAlignment(Element.ALIGN_RIGHT);
+
             getDocument().add(headerDetails);
             getDocument().add(runningBalance);
         } catch (DocumentException e) {

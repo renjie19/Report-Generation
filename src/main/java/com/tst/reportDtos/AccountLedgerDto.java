@@ -1,4 +1,4 @@
-package com.tst.reports;
+package com.tst.reportDtos;
 
 import lombok.Data;
 

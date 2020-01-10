@@ -81,9 +81,7 @@ public abstract class PdfReport {
             Paragraph companyName = new Paragraph("PATHLAND WATER SERVICES\nPathland Address\nPathland Tin Number\n Pathland Contact Number");
             companyName.setAlignment(Element.ALIGN_CENTER);
             header.add(companyName);
-            header.add(new Paragraph());
-            header.add(new Paragraph());
-            Paragraph pageTitle1 = new Paragraph(reportTitle);
+            Paragraph pageTitle1 = new Paragraph("\n"+reportTitle);
             pageTitle1.setAlignment(Element.ALIGN_CENTER);
             header.add(pageTitle1);
             return header;
